@@ -27,7 +27,7 @@ public class CrudDempApplication {
 	public void initUsers() {
 
 		List<User> users = Stream.of(new User("name", "email1", 1, true, "user1", encoder.encode("pass")),
-				new User("name", "email2", 1, true, "user2", encoder.encode("pass"))).collect(Collectors.toList());
+				new User("name", "email2", 0, true, "user2", encoder.encode("pass"))).collect(Collectors.toList());
 		repository.saveAll(users);
 	}
 

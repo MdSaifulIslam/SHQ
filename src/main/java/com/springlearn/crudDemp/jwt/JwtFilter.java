@@ -33,36 +33,36 @@ public class JwtFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-		LocalDateTime now = LocalDateTime.now();
-		StringBuilder sb = new StringBuilder();
-
-	    sb.append("Request Method = [" + request.getMethod() + "], ");
-	    sb.append("Request URL Path = [" + request.getRequestURL() + "], \n");
-
-	    String headers =
-	        Collections.list(request.getHeaderNames()).stream()
-	            .map(headerName -> headerName + " : " + Collections.list(request.getHeaders(headerName)) )
-	            .collect(Collectors.joining(", "));
-
-	    if (headers.isEmpty()) {
-	        sb.append("Request headers: NONE,");
-	    } else {
-	        sb.append("Request headers: ["+headers+"],\n");
-	    }
-
-	    String parameters =
-	        Collections.list(request.getParameterNames()).stream()
-	            .map(p -> p + " : " + Arrays.asList( request.getParameterValues(p)) )
-	            .collect(Collectors.joining(", "));  
-
-	    if (parameters.isEmpty()) {
-	        sb.append("Request parameters: NONE.\n");
-	    } else {
-	        sb.append("Request parameters: [" + parameters + "].\n");
-	    }
-	    
-		System.out.println("\n\n" + dtf.format(now) + " : " + sb + "\n");
+//		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+//		LocalDateTime now = LocalDateTime.now();
+//		StringBuilder sb = new StringBuilder();
+//
+//	    sb.append("Request Method = [" + request.getMethod() + "], ");
+//	    sb.append("Request URL Path = [" + request.getRequestURL() + "], \n");
+//
+//	    String headers =
+//	        Collections.list(request.getHeaderNames()).stream()
+//	            .map(headerName -> headerName + " : " + Collections.list(request.getHeaders(headerName)) )
+//	            .collect(Collectors.joining(", "));
+//
+//	    if (headers.isEmpty()) {
+//	        sb.append("Request headers: NONE,");
+//	    } else {
+//	        sb.append("Request headers: ["+headers+"],\n");
+//	    }
+//
+//	    String parameters =
+//	        Collections.list(request.getParameterNames()).stream()
+//	            .map(p -> p + " : " + Arrays.asList( request.getParameterValues(p)) )
+//	            .collect(Collectors.joining(", "));  
+//
+//	    if (parameters.isEmpty()) {
+//	        sb.append("Request parameters: NONE.\n");
+//	    } else {
+//	        sb.append("Request parameters: [" + parameters + "].\n");
+//	    }
+//	    
+//		System.out.println("\n\n" + dtf.format(now) + " : " + sb + "\n");
 
 		if (!hasAuthorizationHeader(request)) {
 			filterChain.doFilter(request, response);
@@ -82,7 +82,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	private void setAuthenticationContext(String accessToken, HttpServletRequest request) {
 		UserDetails userDetails = getUserDetails(accessToken);
-
 		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
 				null);
 

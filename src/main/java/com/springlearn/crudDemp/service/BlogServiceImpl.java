@@ -58,4 +58,10 @@ public class BlogServiceImpl implements BlogService {
 		return blogRepository.findByIsApproved(isApproved);
 	}
 
+
+	@Override
+	public List<Blog> findByIsApprovedAndUser(boolean approve, User user) {
+		return blogRepository.findByIsApprovedAndUser(approve, user);
+	}
+
 }

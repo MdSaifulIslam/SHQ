@@ -16,4 +16,6 @@ public interface BlogRepository extends JpaRepository<Blog, Integer> {
 	Optional<Blog> findByUserAndId(User user, int post_id);
 	
 	List<Blog> findByIsApproved(boolean isApproved);
+	
+    List<Blog> findByIsApprovedAndUser(boolean approve, User user);
 }

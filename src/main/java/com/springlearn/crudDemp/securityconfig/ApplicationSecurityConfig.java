@@ -56,8 +56,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 			res.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
 		});
 
-		http.authorizeRequests().antMatchers(/*HttpMethod.POST,*/ "/api/auth", "/api/users", "/api/users/social" , "/h2-console/**").permitAll().anyRequest().authenticated();
-		
+		http.authorizeRequests().antMatchers(/*HttpMethod.POST,*/ "/api/auth", "/api/users/users" , "/api/all/posts", "/h2-console/**", "/api/all/posts").permitAll().anyRequest().authenticated();
+	
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 

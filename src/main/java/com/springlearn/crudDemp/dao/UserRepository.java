@@ -18,6 +18,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	List<User> findByUserRoleIdAndIsActive(int userRole, boolean isActive);
 
-	
+	List<User> findByUserRoleId(int userRole);
 	
 }

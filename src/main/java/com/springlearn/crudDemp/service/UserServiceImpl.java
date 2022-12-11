@@ -39,4 +39,14 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUserRoleIdAndIsActive(userRole, isActive);
 	}
 
+	@Override
+	public Optional<User> findById(int id) {
+		return userRepository.findById(id);
+	}
+
+	@Override
+	public List<User> findByUserRoleId(int userRole) {
+		return userRepository.findByUserRoleId(userRole);
+	}
+
 }

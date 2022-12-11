@@ -22,4 +22,6 @@ public interface BlogService {
 
 	public void deletePost(Blog blog);
 
+	public List<Blog> findByIsApprovedAndUser(boolean approve, User user);
+
 }

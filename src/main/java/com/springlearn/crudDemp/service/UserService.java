@@ -16,4 +16,8 @@ public interface UserService {
 	public Optional<User> findByEmail(String eamil);
 	
 	public List<User> findByUserRoleIdAndIsActive(int userRole, boolean isActive);
+	
+	Optional<User> findById(int id);
+	
+	List<User> findByUserRoleId(int userRole);
 }
