@@ -1,5 +1,5 @@
-## Problems or may be solved
-> All APIs are tested using Postman</br>
+## All APIs are tested using Postman</br>
+# Problems or may be solved
 > Frontend are not included.</br>
 > User role solved manually, can be solved by JWT.</br>
 > Whether user is active or not, can be solved by JWT.</br>
