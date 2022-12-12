@@ -42,6 +42,9 @@ public class UserController {
 	@Autowired
 	private BlogService blogService;
 
+	@Value("${app.user.admin}")
+	private int adminRole;
+
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	private Authentication authentication;
@@ -53,7 +56,7 @@ public class UserController {
 	@Value("${app.social.scerete}")
 	private String socialSecreteKey;
 
-	@PostMapping("/auth")
+	@PostMapping("/all/auth")
 	public AuthResponse login(@RequestBody AuthRequest authRequest) {
 
 		try {
@@ -76,7 +79,7 @@ public class UserController {
 	@GetMapping("/admin/users")
 	public List<User> getUser() {
 
-		if (!isAuthorized(1)) {
+		if (!isAuthorized(adminRole)) {
 			throw new RuntimeException("Not Authorised user");
 		}
 
@@ -87,7 +90,7 @@ public class UserController {
 	@GetMapping("/admin/users/{approve}")
 	public List<User> getUser(@PathVariable boolean approve) {
 
-		if (!isAuthorized(1)) {
+		if (!isAuthorized(adminRole)) {
 			throw new RuntimeException("Not Authorised user");
 		}
 
@@ -98,7 +101,7 @@ public class UserController {
 	@GetMapping("/admin/posts/{approve}")
 	public List<Blog> getPost(@PathVariable boolean approve) {
 
-		if (!isAuthorized(1)) {
+		if (!isAuthorized(adminRole)) {
 			throw new RuntimeException("Not Authorised user");
 		}
 
@@ -109,7 +112,7 @@ public class UserController {
 	@PutMapping("/admin/posts/{post_id}")
 	public String approvePost(@PathVariable int post_id) {
 
-		if (!isAuthorized(1)) {
+		if (!isAuthorized(adminRole)) {
 			throw new RuntimeException("Not Authorised user");
 		}
 
@@ -125,7 +128,8 @@ public class UserController {
 	@PutMapping("/admin/users/{user_id}")
 	public String approveUser(@PathVariable int user_id) {
 
-		if (!isAuthorized(1)) {
+		System.out.println("found");
+		if (!isAuthorized(adminRole)) {
 			throw new RuntimeException("Not Authorised user");
 		}
 
@@ -141,7 +145,7 @@ public class UserController {
 	@PostMapping("/admin/admin")
 	public String addAdmin(@RequestBody User user) {
 
-		if (!isAuthorized(1)) {
+		if (!isAuthorized(adminRole)) {
 			throw new RuntimeException("Not Authorised user");
 		}
 

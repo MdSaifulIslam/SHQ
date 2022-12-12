@@ -35,7 +35,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(username -> userRepo.findByUsername(username)
-				.orElseThrow(() -> new UsernameNotFoundException("not found =====>>>>")));
+				.orElseThrow(() -> new UsernameNotFoundException("User not found =====>>>>")));
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 			res.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
 		});
 
-		http.authorizeRequests().antMatchers(/*HttpMethod.POST,*/ "/api/auth", "/api/users/users" , "/api/all/posts", "/h2-console/**", "/api/all/posts").permitAll().anyRequest().authenticated();
+		http.authorizeRequests().antMatchers(/*HttpMethod.POST,*/ "/api/users/users", "/h2-console/**", "/api/all/**").permitAll().anyRequest().authenticated();
 	
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 	}
